@@ -351,7 +351,7 @@ final class ViewController: NSViewController {
     
     func start(theBoard : Array<Array<Int>>, updateUi : @escaping (_ theBoard : Array<Array<Square>>) ->  Void , completed : @escaping (_ status : GameStatus) -> Void) -> Void {
         print(theBoard)
-        queue.async {[weak self] in
+        queue.sync {[weak self] in
             guard let safeSelf = self else {return }
             _ =  safeSelf.runInCurrentThread(theBoard: theBoard, updateUI: { (board) in
                 DispatchQueue.main.async {
